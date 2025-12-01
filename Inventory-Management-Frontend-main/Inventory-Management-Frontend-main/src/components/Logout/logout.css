@@ -1,0 +1,133 @@
+.logout-container {
+    height: 95vh;
+    width: 75vw;
+    background: #1977F3;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.login-form {
+    height: 605px;
+    width: 801px;
+    border-radius: 40px;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.login-nav-img {
+    width: 100%;
+    padding: 0px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.account-form {
+    width: 540px;
+    height: 410px;
+    border-radius: 40px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 10px 30px 0px #0000001A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+
+.account-form .head p {
+    font-family: Poppins;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 48px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.credentials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.credentials input {
+    width: 409px;
+    height: 55px;
+    padding: 14px, 202px, 15px, 21px;
+    border-radius: 40px;
+    border: 1px;
+    outline: none;
+    color: #BFBFBF;
+    border: 1px solid #BFBFBF;
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: 0em;
+    text-align: left;
+    text-indent: 20px;
+}
+
+.credentials div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.credentials div label {
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.login-btn input {
+    background: #F59706;
+    width: 400px;
+    height: 55px;
+    padding: 15px, 0px, 14px, 0px;
+    border-radius: 40px;
+    outline: none;
+    border: none;
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 27px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: white;
+    letter-spacing: 1.5px;
+
+}
+
+.password-div {
+    background-color: red;
+    display: flex;
+    flex-direction: row;
+    width: 40px;
+}
+
+.btn-show-password {
+    width: 120px;
+    outline: none;
+    border: none;
+    font-family: Poppins;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 3px 5px;
+}

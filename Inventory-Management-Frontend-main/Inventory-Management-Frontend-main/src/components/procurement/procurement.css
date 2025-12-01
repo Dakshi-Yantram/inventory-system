@@ -1,0 +1,79 @@
+/* new componet */
+.main-procurement-container {
+  width: 73vw;
+  display: flex;
+  align-items: center;
+  /* background-color: red; */
+}
+.procurement-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.procurement-Add-container {
+  width: 73vw;
+}
+.procurement-btns {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 30px;
+  margin: 30px 0px;
+  background: #f2f8ff;
+  border-radius: 20px;
+}
+.project-input-container{
+  width: 100%;
+}
+.project-input-container-main-div{
+  margin: 15px 0px;
+}
+.pro-div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  background-color: white;
+  border-radius: 20px;
+}
+.project-inputs {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin: 0px;
+  padding: 30px;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.project-data-grid{
+  background-color: white;
+  border-radius: 10px;
+  width: 100%;
+  padding: 10px;
+}
+.summary-dashboard {
+  background-color: white;
+  border-radius: 10px;
+  width: 100%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 10px;
+  margin: 0px;
+}
+.procurement-head-add {
+  width: 73vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 30px;
+  margin: 30px 0px;
+  background: #f2f8ff;
+  border-radius: 20px;
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Inventory Admin Dashboard</title>
+  <style>
+    body { font-family: Arial; background:#f4f6f9; margin:0; }
+    h1 { background:#2c3e50; color:white; padding:15px; }
+    .container { padding:20px; }
+
+    .card {
+      background:white; padding:15px; margin-bottom:15px;
+      border-radius:8px; box-shadow:0px 2px 5px rgba(0,0,0,.1);
+    }
+
+    table { width:100%; border-collapse: collapse; }
+    th, td { padding:8px; border:1px solid #ddd; text-align:left; }
+    th { background:#eee; }
+
+    .btn {
+      padding:7px 12px; margin:5px;
+      border:none; cursor:pointer;
+      background:#3498db; color:white;
+      border-radius:4px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Inventory Admin Dashboard</h1>
+
+<div class="container">
+
+  <div class="card">
+    <h2>📦 Live Stock</h2>
+    <table id="stockTable">
+      <tr><th>Part ID</th><th>Material</th><th>Stock</th></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>📑 Latest Invoices</h2>
+    <table id="invoiceTable">
+      <tr><th>Invoice</th><th>Date</th></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>🚨 Low Stock</h2>
+    <table id="lowStockTable">
+      <tr><th>Part</th><th>Qty</th></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>🧾 Audit Logs</h2>
+    <table id="auditTable">
+      <tr><th>User</th><th>Action</th><th>Part</th><th>Time</th></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>📊 Reports</h2>
+    <button class="btn" onclick="download('/report/stock/excel')">Stock Excel</button>
+    <button class="btn" onclick="download('/report/invoice/excel')">Invoice Excel</button>
+    <button class="btn" onclick="download('/report/request/excel')">Request Excel</button>
+    <button class="btn" onclick="download('/report/pdf/daily')">Daily PDF</button>
+  </div>
+
+</div>
+
+<script>
+const BASE = "http://localhost:3000";
+
+function download(path) {
+  window.open(BASE+path);
+}
+
+// Load Stock
+fetch(BASE + "/dashboard/stock")
+  .then(res => res.json())
+  .then(data => {
+    const table = document.getElementById("stockTable");
+    data.forEach(d => {
+      table.innerHTML += `<tr><td>${d.part_id}</td><td>${d.material_name || ''}</td><td>${d.stock}</td></tr>`;
+    });
+  });
+
+// Load Invoices
+fetch(BASE + "/dashboard/invoices")
+  .then(res => res.json())
+  .then(data => {
+    const table = document.getElementById("invoiceTable");
+    data.forEach(d => {
+      table.innerHTML += `<tr><td>${d.invoice_number}</td><td>${d.submit_date || ''}</td></tr>`;
+    });
+  });
+
+// Load Low Stock
+fetch(BASE + "/dashboard/lowstock")
+  .then(res => res.json())
+  .then(data => {
+    const table = document.getElementById("lowStockTable");
+    data.forEach(d => {
+      table.innerHTML += `<tr><td>${d.part_id}</td><td>${d.closing_balance}</td></tr>`;
+    });
+  });
+
+// Load Audit
+fetch(BASE + "/audit")
+  .then(res => res.json())
+  .then(data => {
+    const table = document.getElementById("auditTable");
+    data.forEach(d => {
+      table.innerHTML += `<tr>
+        <td>${d.username}</td>
+        <td>${d.action}</td>
+        <td>${d.part_id}</td>
+        <td>${new Date(d.created_at).toLocaleString()}</td>
+      </tr>`;
+    });
+  });
+</script>
+
+</body>
+</html>

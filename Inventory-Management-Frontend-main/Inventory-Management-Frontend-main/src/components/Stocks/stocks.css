@@ -1,0 +1,25 @@
+
+.homeContainer{
+    width: 73vw;
+    height: 80vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center ;
+    margin: auto;
+}
+.stockItem {
+    height: 31vh;
+    width: 20vw;
+    background: #3752A2;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navlink{
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+}

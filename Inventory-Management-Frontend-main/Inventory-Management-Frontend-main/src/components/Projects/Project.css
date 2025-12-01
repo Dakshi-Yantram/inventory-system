@@ -1,0 +1,28 @@
+.project-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 30px;
+  margin: 30px 0px;
+  background: #f2f8ff;
+  border-radius: 20px;
+}
+
+.project-container,
+.project-details-container {
+  width: 73vw;
+}
+
+.project-dashboard,
+.details-dashboard {
+  background-color: white;
+  border-radius: 10px;
+  width: 100%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 10px;
+}
+.project-name-in-dashboard {
+  color: #434c64;
+  margin: 13px 3px;
+}

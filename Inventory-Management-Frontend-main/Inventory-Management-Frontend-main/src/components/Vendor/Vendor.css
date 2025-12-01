@@ -1,0 +1,141 @@
+.vendor-container,
+.vendor-form-container {
+  width: 76vw;
+}
+
+.vendor-add-div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 30px;
+  margin: 30px 0px;
+  background: #f2f8ff;
+  border-radius: 20px;
+}
+
+/* vendor form css */
+.vendor-form-head {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 30px;
+    margin: 30px 0px;
+    background: #f2f8ff;
+    border-radius: 20px;
+}
+.vendor-dashboard {
+  background-color: white;
+  border-radius: 10px;
+  width: 100%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 10px;
+}
+.vendor-form {
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.vendor-form::-webkit-scrollbar {
+  display: none;
+}
+#date {
+  width: 25%;
+  height: 50px;
+  outline: none;
+  border: 0.1px solid rgb(172, 172, 172);
+  margin-left: 40px;
+  border-radius: 4px;
+  background-color: transparent;
+  font-size: 18px;
+  padding: 5px 10px;
+  color: rgb(172, 172, 172);
+}
+
+.address {
+  width: 500px;
+  height: 20vh;
+}
+
+
+
+.office,
+.work {
+  /* background-color: red; */
+  display: flex;
+}
+
+.contact-span div {
+  margin: 3px;
+}
+
+.other-details {
+  margin-top: 20px;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.vendor-home-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.vendor-dashboard {
+  padding: 10px;
+}
+.supplier-span{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.span-lead{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* pdf table */
+
+.pdfTable {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 10px 10px;
+}
+
+.vendor-each-list {
+  background-color: white;
+  padding: 50px 0px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.downloadaspdf {
+  margin: 20px;
+}
+
+
+.list-of-vendors-main-container{
+  margin-top: 20px;
+}

@@ -1,0 +1,25 @@
+.raw-home-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.raw-material-form-div {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 10px;
+  margin: 0px;
+}
+.raw-material-add-div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 30px;
+  margin: 30px 0px;
+  background: #e7f0fa;
+
+  border-radius: 20px;
+}
