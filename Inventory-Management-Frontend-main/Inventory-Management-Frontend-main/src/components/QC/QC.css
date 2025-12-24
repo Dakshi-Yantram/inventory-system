@@ -1,0 +1,37 @@
+.page-container {
+  padding: 20px;
+}
+
+.qc-card {
+  padding: 20px;
+}
+
+.qc-actions {
+  margin-bottom: 15px;
+}
+
+.qc-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.qc-table th,
+.qc-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.qc-table th {
+  background: #f5f5f5;
+}
+
+.pass {
+  color: green;
+  font-weight: bold;
+}
+
+.fail {
+  color: red;
+  font-weight: bold;
+}

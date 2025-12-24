@@ -1,117 +1,109 @@
-import React, { useState, useRef } from 'react'
-import './logout.css'
-import logo from '../../assets/logo.png'
-import medicalCross from '../../assets/medical-cross.jpg'
-import TextField from '@mui/material/TextField';
-
-
+import React, { useState, useRef } from 'react';
+import './logout.css';
+import logo from '../../assets/logo.png';
+import medicalCross from '../../assets/medical-cross.jpg';
 
 function Logout() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
+  const [username, setUsername] = useState("");   // <-- email nahi, username
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const passwordRef = useRef(null);
 
+  const handleLogin = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username,   // backend ko username chahiye
+          password
+        })
+      });
 
+      const data = await res.json();
+      console.log("LOGIN RESPONSE:", data);
 
+      if (data.status === "success") {
+        alert("Login Successful!");
 
-  const handleEmailChange = (event) => {
-    const newEmail = event.target.value;
-    setEmail(newEmail);
-
-    // Regular expression for validating email format
-    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-
-    // Check if the email is a valid email address
-    if (!emailRegex.test(newEmail)) {
-      setEmailError(true);
-    } else {
-      setEmailError(false);
+        if (data.role === "admin") {
+          window.location.href = "/";
+        } else {
+          window.location.href = "/";
+        }
+      } else {
+        alert("Invalid Credentials");
+      }
+    } catch (err) {
+      console.error("Login Error:", err);
+      alert("Server Error");
     }
-  }
-
-  const handlePasswordChange = (event) => {
-    const newPassword = event.target.value;
-    setPassword(newPassword);
-
-    // Check if the password is less than 4 characters
-    if (newPassword.length < 4) {
-      setPasswordError(true);
-    } else {
-      setPasswordError(false);
-    }
-  }
+  };
 
 
   return (
     <div className='logout-container'>
       <div className="login-form">
+
         <div className="login-nav-img">
           <img src={logo} alt="Logo" height={80} width={140} />
           <img src={medicalCross} alt="Logo" height={110} width={110} />
         </div>
+
         <div className="account-form">
           <div className='head'>
             <p>Login to your account</p>
           </div>
+
           <div className='credentials'>
+
+            {/* USERNAME */}
             <div>
-              <label htmlFor="Email">Email*</label>
+              <label>Username*</label>
               <input
-                type="email"
-                name="email"
-                id='email'
-                placeholder='Enter Email'
-                value={email}
-                onChange={handleEmailChange}
-                style={{
-                  borderColor: emailError ? 'white' : '',
-                  boxShadow: emailError ? '0 0 4px #FC2323' : '',
-                }}
+                type="text"
+                placeholder="Enter Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
+
+            {/* PASSWORD */}
             <div>
-              <label htmlFor="Password">Password *</label>
+              <label>Password*</label>
               <div>
                 <input
-                  type={showPassword ? 'text' : 'password'}
-                  name="password"
-                  id="password"
-                  placeholder='Enter Password'
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter Password"
                   value={password}
-                  onChange={handlePasswordChange}
+                  onChange={(e) => setPassword(e.target.value)}
                   ref={passwordRef}
-                  style={{
-                    borderColor: passwordError ? 'white' : '',
-                    boxShadow: passwordError ? '0 0 4px #FC2323' : ''
-                  }}
                 />
-                <button className='btn-show-password' onClick={() => {
-                  setShowPassword(!showPassword);
-                  if (!showPassword) {
-                    passwordRef.current.type = 'text';
-                  } else {
-                    passwordRef.current.type = 'password';
-                  }
-                }}>
-                  {showPassword ? 'Hide Password' : 'Show Password'}
+
+                <button
+                  type="button"
+                  className="btn-show-password"
+                  onClick={() => {
+                    setShowPassword(!showPassword);
+                    passwordRef.current.type = !showPassword ? "text" : "password";
+                  }}
+                >
+                  {showPassword ? "Hide Password" : "Show Password"}
                 </button>
               </div>
             </div>
-          </div>
-          <div className='login-btn'>
-            <input type="submit" name="login" id="login" value='Login' />
+
           </div>
 
+          {/* LOGIN BUTTON */}
+          <div className="login-btn">
+            <input type="button" value="Login" onClick={handleLogin} />
+          </div>
 
         </div>
-
       </div>
     </div>
-  )
+  );
 }
 
-export default Logout
-
+export default Logout;

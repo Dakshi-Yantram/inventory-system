@@ -18,7 +18,6 @@ let btnBack = [
     }
 ]
 
-
 function CompleteStockForm(props) {
     const { setCompleteStockPages, ipAddress } = props;
     return (

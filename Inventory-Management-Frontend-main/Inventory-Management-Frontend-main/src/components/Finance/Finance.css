@@ -1,0 +1,87 @@
+/* =========================
+   APP LAYOUT (Sidebar + Content)
+========================= */
+
+.app-layout {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+/* =========================
+   MAIN CONTENT AREA
+========================= */
+
+.main-content {
+  flex: 1;                    /* 🔥 sidebar ke baad poori width */
+  background: #e6e6e6;
+  padding: 26px;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+/* =========================
+   PAGE HEADER (Request / WorkOrder / Finance / HR)
+========================= */
+
+.page-header {
+  background: #eaf2fb;
+  border-radius: 8px;
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+/* Inner wrapper so box full-width rahe
+   aur content properly padded ho */
+.page-header-inner {
+  padding: 10px 80px;         /* 👈 left–right spacing */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Title */
+.page-header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f3c88;
+}
+
+/* Header Button */
+.page-header button {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* =========================
+   CONTENT CARD (Table area / Empty state)
+========================= */
+
+.page-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   RESPONSIVE (Optional but Recommended)
+========================= */
+
+@media (max-width: 1024px) {
+  .page-header-inner {
+    padding: 10px 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

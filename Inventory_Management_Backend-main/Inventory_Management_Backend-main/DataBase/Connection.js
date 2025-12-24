@@ -28,13 +28,15 @@ const pool = mysql.createPool({
   user: process.env.SQL_LOCAL_USER,
   password: process.env.SQL_LOCAL_PASSWORD,
   database: process.env.SQL_LOCAL_DATABASE,
+  port: process.env.SQL_LOCAL_PORT || 3306,
   waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
-}).promise()
+  connectionLimit: 5,
+  queueLimit: 0,
+}).promise();
 
 console.log("✅ DB Host:", process.env.SQL_LOCAL_ADDRESS)
 console.log("✅ DB User:", process.env.SQL_LOCAL_USER)
 console.log("✅ DB Name:", process.env.SQL_LOCAL_DATABASE)
+console.log("✅ DB Port:", process.env.SQL_LOCAL_PORT || 3306)
 
 module.exports = pool

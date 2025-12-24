@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import RawDataTable from './RawDataTable';
+import RawDataTable from "./RawDataTable";
 
-function RowMaterial(props) {
-
-
-  
-  const { setPages,ipAddress} = props
+function RowMaterial({ ipAddress, category }) {
   return (
-    <div className='raw-material-container'> 
-      <RawDataTable ipAddress={ipAddress}/>
+    <div className="raw-material-container">
+      <RawDataTable
+        ipAddress={ipAddress}
+        category={category}
+      />
     </div>
-  )
+  );
 }
 
-export default RowMaterial
+export default RowMaterial;

@@ -42,3 +42,78 @@
   align-items: center;
   justify-content: space-around;
 }
+.MuiDataGrid-columnHeaders {
+  overflow: visible !important;
+}
+
+.MuiDataGrid-root {
+  overflow: visible !important;
+}
+
+.complete-stock-dashboard {
+  overflow: visible !important;
+  position: relative;
+}
+.MuiDataGrid-columnHeaders {
+  overflow: visible !important;
+  z-index: 10 !important;
+  position: relative;
+}
+
+#cat-paper {
+  position: fixed !important;
+  z-index: 9999999 !important;
+  pointer-events: auto !important;
+}
+/* HEADER */
+.MuiDataGrid-columnHeaders {
+  overflow: visible !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+/* MAIN WRAPPER (this was missing!) */
+.MuiDataGrid-main {
+  overflow: visible !important;
+  /* position: relative !important;  */
+  z-index: 5 !important;
+}
+
+/* ROOT WRAPPER */
+.MuiDataGrid-root {
+  overflow: visible !important;
+}
+
+/* CONTAINER DIV */
+.complete-stock-dashboard {
+  overflow: visible !important;
+  position: relative !important;
+}
+
+/* DROPDOWN */
+#cat-paper {
+  position: fixed !important;
+  z-index: 9999999 !important;
+  background: white;
+  pointer-events: auto;
+}
+/* Allow dropdown to float */
+.MuiDataGrid-columnHeaders {
+  overflow: visible !important;
+  z-index: 10 !important;
+}
+
+.MuiDataGrid-root {
+  overflow: visible !important;
+}
+
+.MuiDataGrid-columnHeader {
+  overflow: visible !important;
+  position: relative !important;
+  z-index: 20 !important;
+}
+
+#cat-paper {
+  position: fixed !important;
+  z-index: 999999999 !important;
+}

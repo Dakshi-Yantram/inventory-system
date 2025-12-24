@@ -1,169 +1,165 @@
-import React, { useEffect, useState } from 'react'
-import './Procurement.css'
-import {
-  GridRowModes,
-  DataGrid,
-  GridToolbarContainer,
-  GridActionsCellItem,
-  GridRowEditStopReasons,
-} from '@mui/x-data-grid';
-import {
-  randomCreatedDate,
-  randomTraderName,
-  randomId,
-  randomArrayItem,
-} from '@mui/x-data-grid-generator';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableRow from '@mui/material/TableRow';
-import Button from '@mui/material/Button';
-import axios from 'axios';
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
 
-let procurementTable = {
-  width: '77vw',
+// function ProcurementSummary() {
+//   const role = localStorage.getItem("role");   // "admin", "staff", "vendor"
+
+//   const [summary, setSummary] = useState([]);
+
+//   const project_id = 1;     // change later dynamically
+//   const monthlyQty = 100;   // change later dynamically
+
+//   useEffect(() => {
+//     fetchSummary();
+//   }, []);
+
+//   const fetchSummary = async () => {
+//     try {
+//       const res = await axios.post("http://localhost:3000/procurement-summary", {
+//         project_id,
+//         monthlyQty
+//       });
+//       setSummary(res.data);
+//     } catch (err) {
+//       console.log("Error:", err);
+//     }
+//   };
+
+//   return (
+//     <div style={{ padding: "30px" }}>
+//       <h2>Procurement Summary</h2>
+
+//       <table border="1" cellPadding="8" width="70%">
+//         <thead>
+//           <tr>
+//             <th>Part ID</th>
+//             <th>Material</th>
+
+//             {role !== "vendor" && <th>Required</th>}
+//             {role !== "vendor" && <th>Available</th>}
+
+//             <th>To Buy</th>
+//             <th>Vendor</th>
+//             <th>Price</th>
+//             <th>Total Cost</th>
+//           </tr>
+//         </thead>
+
+//         <tbody>
+//           {summary.map((item, index) => (
+//             <tr key={index}>
+//               <td>{item.part_id}</td>
+//               <td>{item.material_name}</td>
+
+//               {role !== "vendor" && <td>{item.required}</td>}
+//               {role !== "vendor" && <td>{item.available}</td>}
+
+//               <td style={{ color: item.toBuy > 0 ? "red" : "green" }}>
+//                 {item.toBuy}
+//               </td>
+
+//               <td>{item.vendor_name || "-"}</td>
+//               <td>{item.price || "-"}</td>
+//               <td>{item.price ? item.price * item.toBuy : "-"}</td>
+//             </tr>
+
+//           ))}
+//         </tbody>
+//       </table>
+//     </div>
+//   );
+// }
+
+// export default ProcurementSummary;
+
+
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+// ✅ API function (Modular)
+const fetchProcurementSummary = async (project_id, monthlyQty) => {
+  return axios.post("http://localhost:3000/procurement-summary", {
+    project_id,
+    monthlyQty
+  });
+};
+
+// ✅ Row component (Modular)
+function SummaryRow({ item, role }) {
+  return (
+    <tr>
+      <td>{item.part_id}</td>
+      <td>{item.material_name}</td>
+
+      {role !== "vendor" && <td>{item.required}</td>}
+      {role !== "vendor" && <td>{item.available}</td>}
+
+      <td style={{ color: item.toBuy > 0 ? "red" : "green" }}>
+        {item.toBuy}
+      </td>
+
+      <td>{item.vendor_name || "-"}</td>
+      <td>{item.price || "-"}</td>
+      <td>{item.price ? item.price * item.toBuy : "-"}</td>
+    </tr>
+  );
 }
 
-let rows = []
+// ✅ Table component (Modular)
+function SummaryTable({ summary, role }) {
+  return (
+    <table border="1" cellPadding="8" width="70%">
+      <thead>
+        <tr>
+          <th>Part ID</th>
+          <th>Material</th>
 
+          {role !== "vendor" && <th>Required</th>}
+          {role !== "vendor" && <th>Available</th>}
 
-let btnBack = [
-  {
-    id: 1,
-    title: 'Back',
-  },
+          <th>To Buy</th>
+          <th>Vendor</th>
+          <th>Price</th>
+          <th>Total Cost</th>
+        </tr>
+      </thead>
 
-]
+      <tbody>
+        {summary.map((item, index) => (
+          <SummaryRow key={index} item={item} role={role} />
+        ))}
+      </tbody>
+    </table>
+  );
+}
 
-function ProcurementSummary(props) {
-  // console.log(props)
-  const { setProcurementPage, result, ipAddress } = props;
-  const [summaryResult, setSummaryResult] = useState([]);
-  const [stockData, setStockData] = useState([]);
-  const [processedData, setProcessedData] = useState([]);
+// ✅ MAIN COMPONENT
+function ProcurementSummary() {
+  const role = localStorage.getItem("role");
+  const [summary, setSummary] = useState([]);
+
+  const project_id = 1;
+  const monthlyQty = 100;
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`http://${ipAddress}/getcompletestockdata`);
-        setStockData(response.data.data);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-
-    fetchData();
+    loadSummary();
   }, []);
 
-  const handelProcurementSummary = async () => {
+  const loadSummary = async () => {
     try {
-      const response = await axios.post(`http://${ipAddress}/procurementSummary`, result, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (response.status === 200) {
-        const latestStockIds = {};
-        stockData.forEach((stockItem) => {
-          const stockMaterialId = stockItem.stock_material_id;
-          latestStockIds[stockMaterialId] = Math.max(latestStockIds[stockMaterialId] || 0, stockItem.stock_id);
-        });
-
-        const uniqueStockObjects = stockData.filter((stockItem) => stockItem.stock_id === latestStockIds[stockItem.stock_material_id]);
-
-        const closingBalanceSumByMaterial = {};
-        uniqueStockObjects.forEach((stockItem) => {
-          const materialName = stockItem.material_name;
-          closingBalanceSumByMaterial[materialName] = (closingBalanceSumByMaterial[materialName] || 0) + stockItem.closing_balance;
-        });
-
-        const projectDataWithSerial = response.data.closingBalances.map((item, index) => ({
-          ...item,
-          sr_no: index + 1,
-          closing_balance: closingBalanceSumByMaterial[item.materialName] || 0,
-          instock_qty: closingBalanceSumByMaterial[item.materialName] || 0,
-          finalOrder: (item.finalQty - (closingBalanceSumByMaterial[item.materialName] || 0)),
-        }));
-
-        setProcessedData(projectDataWithSerial);
-        setSummaryResult(projectDataWithSerial);
-      } else {
-        console.error(`Failed to fetch data`, response.data.error);
-      }
-    } catch (error) {
-      console.error("Error:", error);
+      const res = await fetchProcurementSummary(project_id, monthlyQty);
+      setSummary(res.data);
+    } catch (err) {
+      console.log("Error:", err);
     }
   };
-
-  useEffect(() => {
-    if (stockData.length > 0) {
-      handelProcurementSummary();
-    }
-  }, [stockData, result]);
-
-  console.log(`processedData: ${JSON.stringify(processedData)}`);
-
-  const handleRowClick = (e, index) => {
-    // Placeholder for row click handling
-    console.log(`Row clicked: ${index}`);
-  };
-  console.log(`summary results : ${JSON.stringify(summaryResult)}`)
 
   return (
-    <div>
-      <div className='procurement-head-add'>
-        <h1>ProcurementSummary</h1>
-        {btnBack.map((item) => {
-          return <Button variant="contained" key={item.id} onClick={() => setProcurementPage(0)}>{item.title}</Button>
-        })}
-      </div>
-      <div className="summary-dashboard">
-        <div style={{ height: 470, width: '100%' }}>
-          <DataGrid
-            columns={[
-              {
-                field: 'sr_no', hideable: false, width: 140, headerName: 'Sr.no'
-              },
-
-              { field: 'materialName', width: 140, headerName: 'Material Name' },
-              {
-                field: 'Package', width: 140, headerName: 'Package'
-              },
-              {
-                field: 'Value', width: 140, headerName: 'value'
-              },
-              {
-                field: 'finalQty', width: 140, headerName: 'Final Qty'
-              },
-              {
-                field: 'instock_qty', width: 140, headerName: 'Instock Balance',
-              },
-              {
-                field: 'finalOrder', width: 140, headerName: 'Final ordering Qty',
-                valueGetter: (params) => { return (params.row.finalQty - params.row.instock_qty) }
-              },
-            ]}
-            rows={processedData}
-            getRowId={(row) => row.materialName}
-            onRowClick={(e) => handleRowClick(e, 1)}
-            getRowHeight={() => 'auto'}
-            getEstimatedRowHeight={() => 200}
-            sx={{
-              '&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell': {
-                py: 1,
-              },
-              '&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell': {
-                py: '16px',
-              },
-              '&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell': {
-                py: '26px',
-              },
-            }}
-          />
-          {/* {selectedRow && <VendorDetails row={selectedRow} />} */}
-        </div>
-      </div>
+    <div style={{ padding: "30px" }}>
+      <h2>Procurement Summary</h2>
+      <SummaryTable summary={summary} role={role} />
     </div>
-  )
+  );
 }
 
-export default ProcurementSummary
+export default ProcurementSummary;
