@@ -1,5 +1,3 @@
-﻿# inventory-system
-
 # Inventory Management System
 
 A full-stack **Inventory Management System** designed for managing materials, stock flow, and quality control using a **microservice architecture**.
@@ -60,4 +58,5 @@ This keeps QC logic **decoupled** from the main backend.
 ```bash
 git clone https://github.com/Dakshi-Yantram/inventory-system.git
 cd inventory-system
+
 
