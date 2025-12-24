@@ -21,3 +21,43 @@ This project is maintained under the **Dakshi-Yantram** organization and support
 
 ## Project Architecture
 
+---
+
+## Tech Stack
+
+### Frontend
+- React
+- Material UI
+- Axios
+
+### Backend
+- Node.js
+- Express.js
+- MySQL
+
+### QC Microservice
+- Python
+- Flask
+- REST APIs
+
+---
+
+## QC Microservice Role
+
+The **Flask QC service** handles:
+- Automated quality checks
+- Validation rules
+- Independent QC logic
+- Secure API communication with backend
+
+This keeps QC logic **decoupled** from the main backend.
+
+---
+
+## Setup Instructions
+
+### 1️Clone the repository
+```bash
+git clone https://github.com/Dakshi-Yantram/inventory-system.git
+cd inventory-system
+
