@@ -2,7 +2,7 @@
 
 A full-stack **Inventory Management System** designed for managing materials, stock flow, and quality control using a **microservice architecture**.
 
-This project is maintained under the **Dakshi-Yantram** organization and supports scalable inventory operations with traceability and QC validation.
+This project is maintained under the **Yantram** organization and supports scalable inventory operations with traceability and QC validation.
 
 ---
 
@@ -58,5 +58,6 @@ This keeps QC logic **decoupled** from the main backend.
 ```bash
 git clone https://github.com/Dakshi-Yantram/inventory-system.git
 cd inventory-system
+
 
 
